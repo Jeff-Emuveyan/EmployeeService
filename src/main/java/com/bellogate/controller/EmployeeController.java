@@ -1,14 +1,25 @@
 package com.bellogate.controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.bellogate.entity.Employee;
+import com.bellogate.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 
+    @Autowired
+    EmployeeService employeeService;
+
     @GetMapping
-    public String getEmployee(){
-        return "Hello, Jeff";
+    public Collection<Employee> getEmployees(){
+        return employeeService.getEmployees();
+    }
+
+    @PostMapping
+    public Employee getEmployee(@RequestBody Employee employee){
+        return employeeService.create(employee);
     }
 }
